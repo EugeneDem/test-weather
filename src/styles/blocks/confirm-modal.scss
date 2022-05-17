@@ -1,0 +1,63 @@
+.confirm-modal {
+  .ui-modal__body {
+    min-height: 350px;
+  }
+
+  &__wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header {
+    
+  }
+
+  &__title {
+    font-size: 32px;
+    line-height: 38px;
+    font-weight: 700;
+  }
+
+  &__subtitle {
+    font-size: 24px;
+    line-height: 24px;
+    color: #767676;
+  }
+
+  &__content {
+
+  }
+
+  &__action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+  }
+
+  &__action-item {
+    display: flex;
+  }
+
+  &__action-item &__btn + &__btn {
+    margin-left: 30px;
+  }
+
+  &__btn {
+    border: medium none;
+    background: none;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #9B51E0;
+    text-transform: uppercase;
+    cursor: pointer;
+
+    &:disabled,
+    &.disabled {
+      color: #C1C1C1;
+      pointer-events: none;
+    }
+  }
+}

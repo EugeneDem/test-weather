@@ -1,0 +1,34 @@
+// media queries
+$screen-xs-min: 375px !default;
+$screen-sm-min: 768px !default;
+$screen-md-min: 1024px !default;
+$screen-lg-min: 1280px !default;
+
+$screen-xs-max: ($screen-xs-min - 1);
+$screen-sm-max: ($screen-sm-min - 1);
+$screen-md-max: ($screen-md-min - 1);
+$screen-lg-max: ($screen-lg-min - 1);
+
+$smallPhone: screen and (max-width: $screen-xs-max);
+$phone: screen and (max-width: $screen-sm-max);
+$tablet: screen and (max-width: $screen-md-max);
+$laptop: screen and (max-width: $screen-lg-max);
+// $onlyDesktop: screen and (min-width: $screen-md-min + 1);
+
+// $phone: screen and (max-width: $screen-sm-min);
+// $tablet: screen and (max-width: $screen-md-min);
+$noPhone: screen and (min-width: $screen-sm-min);
+$onlyDesktop: screen and (min-width: $screen-md-min);
+$onlyTablet: 'screen and (min-width: 768px) and (max-width: 1023px)';
+
+// Grid
+$grid-gutter-width: 30px !default;
+$grid-columns: 12 !default;
+
+// colors
+$default_color: black !default;
+
+// Typography
+@import url("https://fonts.googleapis.com/css?family=Lato:700,500,400,300");
+// $font-path: "~@/assets/fonts/" !default;
+$font-light: "Lato" !default;
