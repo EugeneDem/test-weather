@@ -2,7 +2,7 @@
   <div v-if="getListCity" class="weather-card">
     <div class="weather-card__panel">
       <h4 class="weather-card__title">{{ getList.name }}, {{ getList.sys.country }}</h4>
-      <p class="weather-card__location">Your current location</p>
+      <p class="weather-card__location">{{ getName(getList.sys.country) }}</p>
       <div class="weather-card__content">
         <div class="weather-card__values">
           <div class="weather-card__values-label">Weather</div>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+// import moment from 'moment'
 import { mapState } from 'vuex'
 export default {
   name: 'WidgetCard',
@@ -62,6 +63,12 @@ export default {
     this.setTimer(0)
   },
   methods: {
+    getName(name) {
+      const regionNames = new Intl.DisplayNames(
+        [name], {type: 'region'}
+      )
+      return (this.dataType === 'single') ? 'Your current location' : regionNames.of(name)
+    },
     getTemperature(count) {
       return Math.ceil(count)
     },
@@ -102,6 +109,7 @@ export default {
       this.clearTimer()
 
       const timer = setInterval(() => {
+        // const minutes = moment().startOf('day').fromNow()
         const minutes = Math.floor(val / 60)
 
         this.timer.value = `${minutes} minutes`
