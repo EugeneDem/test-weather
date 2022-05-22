@@ -15,8 +15,13 @@ export default {
   },
   watch: {
     state: {
-      handler() {this.$store.dispatch('saveToLocalStorage')},
+      handler() {this.$store.dispatch('localStorageApp/saveToLocalStorage')},
       deep: true
+    }
+  },
+  computed: {
+    state() {
+      return this.$store.state
     }
   }
 }

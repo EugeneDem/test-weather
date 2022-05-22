@@ -40,13 +40,12 @@ export default {
     return {
       keyCode: 0,
       keyCodeList: 0,
-      currentCity: null,
-      cityCurrent: 'Moscow',
-      cityList: ['Penza', 'Perm', 'Novosibirsk', 'Kazan']
+      currentCityDefault: { name: 'Moscow' },
+      listCityDefault: [{ name: 'Penza' }, { name: 'Perm' }, { name: 'Novosibirsk' }, { name: 'Kazan' }]
     }
   },
   computed: {
-    ...mapState(['listCity'])
+    ...mapState(['currentCity', 'listCity'])
   },
   watch: {
     listCity() {
@@ -60,36 +59,43 @@ export default {
   },
   methods: {
     fetchData() {
-      this.getCurrentCity(this.cityCurrent)
-      this.getListCity(this.cityList)
+      (Object.keys(this.currentCity).length) ?
+        this.getCurrentCity(this.currentCityDefault) :
+        this.getCurrentCity(this.currentCity);
+      (this.listCity.length) ?
+        this.getListCity(this.listCity) :
+        this.getListCity(this.listCityDefault);
     },
     addCity(popupType) {
       this.$store.dispatch('popup/showPopup', popupType)
     },
-    async getCurrentCity(name) {
+    async getCurrentCity(item) {
       const requestParams = {
         method: 'get',
-        params: '&q=' + name
+        params: '&q=' + item.name
       }
       const response = await this.$Request.send(requestParams)
       if (response.status === 200) {
-        this.currentCity = response.data
+        const currentCity = response.data
+        currentCity.lastUpdate = new Date()
         this.keyCode++
-        this.$store.dispatch('setCurrentCity', this.currentCity)
+        this.$store.dispatch('setCurrentCity', currentCity)
       } else {
         console.log('err')
       }
     },
-    getListCity(arr) {
+    async getListCity(arr) {
       const cityListArr = []
-      const load = async(name) => {
+      const load = async(item) => {
         const requestParams = {
           method: 'get',
-          params: '&q=' + name
+          params: '&q=' + item.name
         }
         const response = await this.$Request.send(requestParams)
         if (response.status === 200) {
-          cityListArr.push(response.data)
+          const currentCity = response.data
+          currentCity.lastUpdate = new Date()
+          cityListArr.push(currentCity)
         } else {
           console.log('err')
         }

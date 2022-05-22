@@ -68,8 +68,7 @@ export default {
   },
   validations: {
     cityInp: {
-      minLength: minLength(4),
-      alpha
+      minLength: minLength(4)
     }
   },
   computed: {
@@ -94,14 +93,26 @@ export default {
       this.formError = false
     },
     async formSubmit() {
+      this.cityInp.trim()
+      this.$v.cityInp.$model = this.cityInp.trim()
       this.$v.cityInp.$touch()
+
       if (this.formError) return
       this.errors = {}
-      this.errors.city = (!this.$v.cityInp.minLength) ? `City is required must have at least ${this.$v.cityInp.$params.minLength.min} letters` : (!this.$v.cityInp.alpha) ? 'City is only alphabet characters' : ''
+      this.errors.city = (!this.$v.cityInp.minLength) ? `City is required must have at least ${this.$v.cityInp.$params.minLength.min} letters` : ''
+      if (this.errors.city === '') {
+        const arr = this.$v.cityInp.$model.split(' ')
+        for (let i = 0; i < arr.length; i++) {
+          const item = arr[i]
+          if (!alpha(item)) {
+            this.errors.city = 'City is only alphabet characters'
+          }
+        }
+      }
 
       if (this.$v.$invalid) return
 
-      if (!this.$v.$invalid && !this.formError) {
+      if (!this.$v.$invalid && !this.formError && this.errors.city === '') {
 
         const requestParams = {
           method: 'get',
@@ -110,15 +121,17 @@ export default {
         const response = await this.$Request.send(requestParams)
         if (response.status === 200) {
           let searchName = false
+          const addCity = response.data
+          addCity.lastUpdate = new Date()
           for (const [i, v] of this.listCity.entries()) {
-            if (v.name === response.data.name) {
-              this.listCity.splice(i, 1, response.data)
+            if (v.name === addCity.name) {
+              this.listCity.splice(i, 1, addCity)
               searchName = true
               break
             }
           }
           if (!searchName) {
-            this.listCity.push(response.data)
+            this.listCity.push(addCity)
           }
           this.closeModal()
         } else {

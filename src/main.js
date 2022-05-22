@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
 
-// import 'normalize.css/normalize.css'
+import 'normalize.css/normalize.css'
 import '@/styles/index.scss'
 
 import App from './App.vue'

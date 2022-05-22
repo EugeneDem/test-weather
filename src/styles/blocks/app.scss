@@ -14,7 +14,7 @@
 
 @media #{$onlyDesktop} {
   ::-webkit-scrollbar-thumb {
-    background-color: #273AA5;
+    background-color: #C4C4C4;
     border-radius: 7px;
   }
 }
@@ -44,5 +44,15 @@ a {
     padding-left: 40px;
     padding-right: 40px;
     overflow: hidden;
+
+    @media #{$tablet} {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    @media #{$phone} {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
 }

@@ -11,10 +11,7 @@
 export default {
   name: 'LayoutTpl',
   data() {
-    return {
-      options: {
-      }
-    }
+    return {}
   },
   computed: {
     routePath() {
@@ -23,19 +20,11 @@ export default {
   },
   watch: {
   },
-  created() {
-  },
-  beforeDestroy() {
-    this.unwatch()
-  },
   mounted() {
     this.loadData()
   },
   methods: {
     loadData() {
-    },
-    randomInRange(min, max) {
-      return Math.random() * (max - min) + min
     }
   }
 }

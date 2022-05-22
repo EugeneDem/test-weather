@@ -5,21 +5,47 @@
   box-shadow: 0px 2px 10px rgba(10, 10, 10, 0.25);
 
   &__panel {
-    padding: 24px;
+    padding: 25px;
+
+    @media #{$phone} {
+      padding: 15px;
+    }
   }
 
   &__title {
+    max-width: 90%;
     font-size: 32px;
     line-height: 38px;
+    margin-bottom: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    @media #{$phone} {
+      font-size: 24px;
+      line-height: 26px;
+      margin-bottom: 10px;
+    }
   }
 
   &__location {
     font-size: 18px;
     line-height: 24px;
+    margin-bottom: 41px;
+
+    @media #{$phone} {
+      font-size: 16px;
+      line-height: 18px;
+      margin-bottom: 21px;
+    }
   }
 
   &__content {
 
+  }
+
+  &__values-list {
+    padding-bottom: 8px;
   }
 
   &__values {
@@ -28,6 +54,21 @@
     border-bottom: 1px solid #C4C4C4;
     font-size: 18px;
     line-height: 24px;
+    padding-bottom: 11px;
+
+    @media #{$phone} {
+      font-size: 14px;
+      line-height: 20px;
+      padding-bottom: 6px;
+    }
+  }
+
+  &__values:not(:last-child) {
+    margin-bottom: 16px;
+
+    @media #{$phone} {
+      margin-bottom: 10px;
+    }
   }
 
   &__values-label {
@@ -43,12 +84,22 @@
     text-align: right;
     font-size: 16px;
     line-height: 24px;
+
+    @media #{$phone} {
+      font-size: 14px;
+      line-height: 20px;
+    }
   }
 
   &__actions {
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
+    padding-top: 32px;
+
+    @media #{$phone} {
+      padding-top: 22px;
+    }
   }
 
   &__btn {
